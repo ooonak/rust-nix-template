@@ -15,3 +15,10 @@ $ nix profile add nixpkgs#direnv nixpkgs#nix-direnv
 # And also add to .bashrc
 eval "$(direnv hook bash)"
 ```
+
+Now in project root
+
+```bash
+$ echo "use flake" > .envrc
+$ direnv allow
+```

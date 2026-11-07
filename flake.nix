@@ -2,7 +2,7 @@
   description = "Rust development environment";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
   };
 
   outputs = { self, nixpkgs }:
@@ -27,6 +27,7 @@
               rustfmt
               clippy
               rust-analyzer
+              cargo-audit
               pkg-config
             ];
 
