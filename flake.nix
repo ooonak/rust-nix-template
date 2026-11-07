@@ -20,7 +20,7 @@
           # Use the static musl toolchain.
           staticPkgs = pkgs.pkgsStatic;
 
-          pname = "my-rust-app";
+          pname = "rust-nix-template";
           binaryName = "hello";
 
           app = staticPkgs.rustPlatform.buildRustPackage {
