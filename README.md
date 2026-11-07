@@ -35,6 +35,12 @@ Run the published image with Docker:
 
 ```sh
 docker run --rm ghcr.io/ooonak/rust-nix-template:latest
+
+# or
+
+$ ./scripts/hardened-run.sh ghcr.io/ooonak/rust-nix-template:latest
+Starting hardened one-shot container: ghcr.io/ooonak/rust-nix-template:latest
+Hello, world!
 ```
 
 It prints:
