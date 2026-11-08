@@ -69,7 +69,10 @@
               pkgs.vulkan-loader
             ];
 
-            VK_DRIVER_FILES = "${pkgs.mesa}/share/vulkan/icd.d/intel_icd.x86_64.json";
+            shellHook = ''
+              export VK_DRIVER_FILES="$(printf '%s:' ${pkgs.mesa}/share/vulkan/icd.d/*.json)"
+              export VK_DRIVER_FILES="''${VK_DRIVER_FILES%:}"
+            '';
 
             RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
           };
