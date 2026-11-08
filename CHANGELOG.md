@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/ooonak/rust-nix-template/compare/v0.1.0...v0.2.0) (2026-11-08)
+
+
+### Features
+
+* Added script to test run in hardened container ([6f916c7](https://github.com/ooonak/rust-nix-template/commit/6f916c70f9131a7a09f9f5247552ae81e90c540b))
+
 ## 0.1.0 (2026-11-07)
 
 
