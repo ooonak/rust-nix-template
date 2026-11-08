@@ -1,5 +1,5 @@
 {
-  description = "Rust development environment and static OCI image";
+  description = "Rust GUI application development environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
@@ -12,47 +12,6 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
     in
     {
-      packages = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-
-          # Use the static musl toolchain.
-          staticPkgs = pkgs.pkgsStatic;
-
-          pname = "rust-nix-template";
-          binaryName = "hello";
-
-          app = staticPkgs.rustPlatform.buildRustPackage {
-            inherit pname;
-            version = "0.1.0";
-            src = ./.;
-            cargoLock.lockFile = ./Cargo.lock;
-          };
-
-          # Root filesystem
-          rootfs = pkgs.buildEnv {
-            name = "${pname}-rootfs";
-            paths = [ app ];
-            pathsToLink = [ "/bin" ];
-          };
-
-          # OCI image
-          image = pkgs.dockerTools.buildImage {
-            name = pname;
-            tag = "latest";
-            copyToRoot = rootfs;
-            config = {
-              Entrypoint = [ "/bin/${binaryName}" ];
-            };
-          };
-        in
-        {
-          default = app;
-          inherit app rootfs image;
-        }
-      );
-
       formatter = forAllSystems (
         system:
         let
@@ -94,7 +53,23 @@
               rust-analyzer
               cargo-audit
               pkg-config
+
+              wayland
+              libxkbcommon
+
+              vulkan-loader
+              vulkan-headers
+              vulkan-tools
+              mesa
             ];
+
+            LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
+              pkgs.wayland
+              pkgs.libxkbcommon
+              pkgs.vulkan-loader
+            ];
+
+            VK_DRIVER_FILES = "${pkgs.mesa}/share/vulkan/icd.d/intel_icd.x86_64.json";
 
             RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
           };

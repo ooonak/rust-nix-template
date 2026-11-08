@@ -4,3 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+egui = "0.37.0"
+eframe = { version = "0.37.0", default-features = false, features = ["default_fonts", "wayland", "wgpu"] }
+env_logger = "0.11"
